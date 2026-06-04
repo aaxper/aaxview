@@ -14,24 +14,19 @@ Window {
     color: "transparent"
     Rectangle {
         anchors.fill: parent
-        color: root.opaqueColor(settings.bgColor)
-        opacity: root.colorAlpha(settings.bgColor)
+        color: root.rgbaToColor(settings.bgColor)
     }
 
     function getDirectory(filePath) {
         return filePath.substring(0, filePath.lastIndexOf("/") + 1);
     }
 
-    function colorAlpha(color) {
-        if (color.length === 9)
-            return parseInt(color.slice(7, 9), 16) / 255;
-        return 1;
-    }
-
-    function opaqueColor(color) {
-        if (color.length === 9)
-            return color.slice(0, 7);
-        return color;
+    function rgbaToColor(rgbaHex, forceOpaque = false) {
+        var r = parseInt(rgbaHex.substr(1, 2), 16) / 255
+        var g = parseInt(rgbaHex.substr(3, 2), 16) / 255
+        var b = parseInt(rgbaHex.substr(5, 2), 16) / 255
+        var a = (rgbaHex.length == 7 || forceOpaque) ? 1 : parseInt(rgbaHex.substr(7, 2), 16) / 255
+        return Qt.rgba(r, g, b, a)
     }
 
     function isVectorSource(source) {
@@ -200,6 +195,7 @@ Window {
         property string rotate: "T"
         property string rotateBack: "shift+T"
         property string toggleSettings: "P"
+        property string barVisibility: "visible"
         property string fontFamily: ""
         property int fontSize: 14
         property int settingsWidth: 380

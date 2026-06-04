@@ -17,24 +17,19 @@ RowLayout {
 
     spacing: 8
 
-    function colorAlpha(color) {
-        if (color.length === 9)
-            return parseInt(color.slice(7, 9), 16) / 255;
-        return 1;
-    }
-
-    function opaqueColor(color) {
-        if (color.length === 9)
-            return color.slice(0, 7);
-        return color;
+    function rgbaToColor(rgbaHex, forceOpaque = false) {
+        var r = parseInt(rgbaHex.substr(1, 2), 16) / 255
+        var g = parseInt(rgbaHex.substr(3, 2), 16) / 255
+        var b = parseInt(rgbaHex.substr(5, 2), 16) / 255
+        var a = (rgbaHex.length == 7 || forceOpaque) ? 1 : parseInt(rgbaHex.substr(7, 2), 16) / 255
+        return Qt.rgba(r, g, b, a)
     }
 
     Text {
         text: root.label
         font.pixelSize: root.appSettings.fontSize
         font.family: root.appSettings.fontFamily
-        color: root.opaqueColor(root.appSettings.fgColor)
-        opacity: root.colorAlpha(root.appSettings.fgColor)
+        color: root.rgbaToColor(root.appSettings.fgColor)
         Layout.preferredWidth: root.labelWidth
         Layout.alignment: Qt.AlignVCenter
     }
@@ -45,12 +40,10 @@ RowLayout {
         currentIndex: root.options.indexOf(root.value)
         font.pixelSize: root.appSettings.fontSize
         font.family: root.appSettings.fontFamily
-        palette.buttonText: root.opaqueColor(root.appSettings.fgColor2)
-        opacity: root.colorAlpha(root.appSettings.fgColor2)
+        palette.buttonText: root.rgbaToColor(root.appSettings.fgColor2)
         Layout.minimumWidth: 120
         background: Rectangle {
-            color: root.opaqueColor(root.appSettings.bgColor2)
-            opacity: root.colorAlpha(root.appSettings.bgColor2)
+            color: root.rgbaToColor(root.appSettings.bgColor2)
             radius: 3
         }
         popup: Popup {
@@ -58,7 +51,7 @@ RowLayout {
             width: input.width
             padding: 0
             background: Rectangle {
-                color: root.opaqueColor(root.appSettings.bgColor2)
+                color: root.rgbaToColor(root.appSettings.bgColor2, true)
                 radius: 3
             }
             contentItem: ListView {

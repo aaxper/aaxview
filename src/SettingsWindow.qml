@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Window
+import QtQuick.Dialogs
 import QtCore
 
 Window {
@@ -65,7 +66,7 @@ Window {
                 text: "Coloring"
                 font.pixelSize: settingsWindow.appSettings.fontSize + 4
                 font.family: settingsWindow.appSettings.fontFamily
-                color: settingsWindow.appSettings.fgColor
+                color: settingsWindow.owner.rgbaToColor(settingsWindow.appSettings.fgColor)
                 Layout.topMargin: 8
                 Layout.bottomMargin: 4
             }
@@ -110,7 +111,7 @@ Window {
                 text: "Binds"
                 font.pixelSize: settingsWindow.appSettings.fontSize + 4
                 font.family: settingsWindow.appSettings.fontFamily
-                color: settingsWindow.appSettings.fgColor
+                color: settingsWindow.owner.rgbaToColor(settingsWindow.appSettings.fgColor)
                 Layout.topMargin: 16
                 Layout.bottomMargin: 4
             }
@@ -183,7 +184,7 @@ Window {
                 text: "Miscellaneous"
                 font.pixelSize: settingsWindow.appSettings.fontSize + 4
                 font.family: settingsWindow.appSettings.fontFamily
-                color: settingsWindow.appSettings.fgColor
+                color: settingsWindow.owner.rgbaToColor(settingsWindow.appSettings.fgColor)
                 Layout.topMargin: 16
                 Layout.bottomMargin: 4
             }

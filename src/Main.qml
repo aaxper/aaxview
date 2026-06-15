@@ -22,11 +22,11 @@ Window {
     }
 
     function rgbaToColor(rgbaHex, forceOpaque = false) {
-        var r = parseInt(rgbaHex.substr(1, 2), 16) / 255
-        var g = parseInt(rgbaHex.substr(3, 2), 16) / 255
-        var b = parseInt(rgbaHex.substr(5, 2), 16) / 255
-        var a = (rgbaHex.length == 7 || forceOpaque) ? 1 : parseInt(rgbaHex.substr(7, 2), 16) / 255
-        return Qt.rgba(r, g, b, a)
+        var r = parseInt(rgbaHex.substr(1, 2), 16) / 255;
+        var g = parseInt(rgbaHex.substr(3, 2), 16) / 255;
+        var b = parseInt(rgbaHex.substr(5, 2), 16) / 255;
+        var a = (rgbaHex.length == 7 || forceOpaque) ? 1 : parseInt(rgbaHex.substr(7, 2), 16) / 255;
+        return Qt.rgba(r, g, b, a);
     }
 
     function isVectorSource(source) {

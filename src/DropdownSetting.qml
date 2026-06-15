@@ -25,6 +25,10 @@ RowLayout {
         return Qt.rgba(r, g, b, a);
     }
 
+    function halveOpacity(color) {
+        return Qt.rgba(color.r, color.g, color.b, color.a * 0.5);
+    }
+
     Text {
         text: root.label
         font.pixelSize: root.appSettings.fontSize
@@ -45,6 +49,45 @@ RowLayout {
         background: Rectangle {
             color: root.rgbaToColor(root.appSettings.bgColor2)
             radius: 3
+        }
+        delegate: ItemDelegate {
+            id: delegateRoot
+            text: modelData
+            width: input.width
+            implicitHeight: 24
+            font.pixelSize: root.appSettings.fontSize
+            font.family: root.appSettings.fontFamily
+            palette.text: root.rgbaToColor(root.appSettings.fgColor2)
+            highlighted: ListView.isCurrentItem
+            hoverEnabled: true
+            contentItem: Text {
+                id: delegateText
+                text: delegateRoot.text
+                font: delegateRoot.font
+                color: delegateRoot.palette.text
+                elide: Text.ElideRight
+                verticalAlignment: Text.AlignVCenter
+            }
+            background: Rectangle {
+                color: delegateRoot.highlighted
+                    ? root.halveOpacity(root.rgbaToColor(root.appSettings.fgColor))
+                    : "transparent"
+            }
+            ToolTip {
+                visible: delegateText.truncated && delegateRoot.hovered
+                contentItem: Text {
+                    text: delegateText.text
+                    font: root.appSettings.fontFamily
+                    color: root.rgbaToColor(root.appSettings.fgColor)
+                }
+                delay: 300
+                background: Rectangle {
+                    color: root.rgbaToColor(root.appSettings.bgColor)
+                    border.color: root.rgbaToColor(root.appSettings.fgColor)
+                    border.width: 1
+                    radius: 3
+                }
+            }
         }
         Layout.preferredHeight: 24
         popup: Popup {

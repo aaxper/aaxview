@@ -46,6 +46,7 @@ RowLayout {
             color: root.rgbaToColor(root.appSettings.bgColor2)
             radius: 3
         }
+        Layout.preferredHeight: 24
         popup: Popup {
             y: input.height - 1
             width: input.width

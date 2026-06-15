@@ -7,21 +7,18 @@
 #include <QDir>
 #include <QFile>
 
-static QString lastFilePath()
-{
+static QString lastFilePath() {
     return QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/lastfile";
 }
 
-static QString loadLastFile()
-{
+static QString loadLastFile() {
     QFile f(lastFilePath());
     if (f.open(QIODevice::ReadOnly))
         return QString::fromUtf8(f.readAll()).trimmed();
     return {};
 }
 
-static void saveLastFile(const QString &path)
-{
+static void saveLastFile(const QString &path) {
     if (path.isEmpty())
         return;
     QString dir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
@@ -31,8 +28,7 @@ static void saveLastFile(const QString &path)
         f.write(path.toUtf8());
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     app.setOrganizationName("aaxview");
     app.setApplicationName("aaxview");

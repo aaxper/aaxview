@@ -117,19 +117,19 @@ Window {
             }
 
             TextSetting {
-                label: "next:"
-                labelWidth: _labelMetrics.advanceWidth + 8
-                value: settingsWindow.appSettings.next
-                appSettings: settingsWindow.appSettings
-                onAccepted: editedValue => settingsWindow.appSettings.next = editedValue
-            }
-
-            TextSetting {
                 label: "previous:"
                 labelWidth: _labelMetrics.advanceWidth + 8
                 value: settingsWindow.appSettings.previous
                 appSettings: settingsWindow.appSettings
                 onAccepted: editedValue => settingsWindow.appSettings.previous = editedValue
+            }
+
+            TextSetting {
+                label: "next:"
+                labelWidth: _labelMetrics.advanceWidth + 8
+                value: settingsWindow.appSettings.next
+                appSettings: settingsWindow.appSettings
+                onAccepted: editedValue => settingsWindow.appSettings.next = editedValue
             }
 
             TextSetting {
